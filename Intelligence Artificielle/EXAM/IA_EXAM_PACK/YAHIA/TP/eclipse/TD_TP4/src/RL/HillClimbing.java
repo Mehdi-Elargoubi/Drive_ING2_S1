@@ -1,0 +1,17 @@
+package RL;
+
+public class HillClimbing extends SolverNQueens {
+
+    
+    public HillClimbing(int boardSize) {
+        super(boardSize);
+        best = new Node(boardSize);
+    }
+
+    @Override
+    public void solve() {
+     //TODO
+
+
+    }
+}

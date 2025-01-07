@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;RL.hillClumbing.java&apos; to &apos;HillClumbing.java&apos;&#x0D;&#x0A;- Original project: &apos;TD_TP4&apos;&#x0D;&#x0A;- Original element: &apos;RL.hillClumbing.java&apos;&#x0D;&#x0A;- Renamed element: &apos;RL.HillClumbing.java&apos;" description="Rename compilation unit &apos;hillClumbing.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;RL{hillClumbing.java" name="HillClumbing.java" references="false" stamp="1668418722998" version="1.0"/>
+</session>

@@ -1,0 +1,8 @@
+I = imread('pout.tif');
+figure
+imshow(I);
+figure
+n=histeq(I);
+imshow(n)
+imadjust()
+% Appliquer l'égalisation de l'histogramme

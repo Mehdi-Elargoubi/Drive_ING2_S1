@@ -1,0 +1,32 @@
+package RL;
+
+
+public class Main {
+
+    public static void main(String[] args) throws Exception{
+	long time;
+	SolverNQueens nq;
+	   
+
+	/*
+	System.out.println("N = " + 8);
+	System.out.println("Hill Climbing approach");
+	nq = new HillClimbing(8);
+	nq.best.show();
+	time = System.currentTimeMillis();
+	nq.solve();
+	time = System.currentTimeMillis()-time;
+	nq.best.show();
+	System.out.println("Total Time taken :" + time);
+	
+	System.out.println("Simulated Annealing approach");
+	nq = new SimulatedAnnealing(8,1000);
+	time = System.currentTimeMillis();
+	nq.solve();
+	time = System.currentTimeMillis()-time;
+	nq.best.show();
+	System.out.println("Total Time taken :" + time);
+    */
+
+    }
+}

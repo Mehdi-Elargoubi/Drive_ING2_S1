@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 4 elements to &apos;exem/src/Alpha_Beta&apos;&#x0D;&#x0A;- Original project: &apos;TP2&apos;&#x0D;&#x0A;- Destination element: &apos;exem/src/Alpha_Beta&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     Alpha_Beta.Main.java&#x0D;&#x0A;     Alpha_Beta.Puissance3.java&#x0D;&#x0A;     Alpha_Beta.Node.java&#x0D;&#x0A;     Alpha_Beta.Coup.java" description="Copy compilation units" destination="=exem/src&lt;Alpha_Beta" element1="/src&lt;Alpha_Beta{Main.java" element2="/src&lt;Alpha_Beta{Puissance3.java" element3="/src&lt;Alpha_Beta{Node.java" element4="/src&lt;Alpha_Beta{Coup.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1670273583844" units="4" version="1.0"/>
+</session>

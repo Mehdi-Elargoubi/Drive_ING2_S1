@@ -1,0 +1,109 @@
+% 1) Création de l'image
+I = [10 2 1 1 10 2 6;
+      7 5 5 4 4 2 3 ;
+      7 2 0 3 2 1 8 ;
+      6 3 2 0 3 0 3 ;
+      5 3 2 7 0 3 5];
+
+disp(I);
+
+% 2) Calcul de la dynamique
+% La dynamique d'une image est définie par la différence entre la valeur maximale et la valeur minimale
+I_min = min(I(:));
+I_max = max(I(:));
+%dynamique = I_max - I_min;
+%disp(['Dynamique de l''image : ', num2str(dynamique)]);
+disp(['Dynamique de l''image : [', num2str(I_min),',',num2str(I_max),']']);
+
+% 3) Calcul de la valeur moyenne et de la variance
+moyenne = mean(I(:)); % Moyenne des valeurs de l'image
+%disp(moyenne)
+disp(['Moyenne : ', num2str(moyenne)]);
+
+variance = var(I(:)); % Variance des valeurs de l'image
+%disp(variance)
+disp(['Variance : ', num2str(variance)]);
+
+
+% 4) Calcul de l'histogramme et de l'histogramme cumulé
+figure;
+subplot(1, 2, 1);
+h = hist(I(:), I_min:I_max); % Histogramme avec des niveaux de gris entre 0 et 10
+bar(I_min:I_max,h);
+title('Histogramme h');
+disp('Histogramme h :');
+disp(h);
+
+subplot(1, 2, 2);
+H = cumsum(h);
+bar(I_min:I_max,H);
+title('Histogramme Cummulé H');
+disp('Histogramme cumulé H :');
+disp(H);
+
+X = sum(h);
+disp('X = ')
+disp(X);
+
+% 1) Création de l'image
+I = [10 2 1 1 10 2 6;
+     7 5 5 4 4 2 3 ;
+     7 2 0 3 2 1 8 ;
+     6 3 2 0 3 0 3 ;
+     5 3 2 7 0 3 5];
+
+disp(I);
+
+% 2) Calcul de la dynamique
+I_min = min(I(:));
+I_max = max(I(:));
+disp(['Dynamique de l''image : [', num2str(I_min), ',', num2str(I_max), ']']);
+
+% 3) Calcul de la valeur moyenne et de la variance
+moyenne = mean(I(:));
+disp(['Moyenne : ', num2str(moyenne)]);
+
+variance = var(I(:));
+disp(['Variance : ', num2str(variance)]);
+
+% 4) Calcul de l'histogramme et de l'histogramme cumulé
+figure;
+subplot(1, 3, 1);
+h = hist(I(:), I_min:I_max); % Histogramme avec des niveaux de gris entre 0 et 10
+bar(I_min:I_max, h);
+title('Histogramme h');
+disp('Histogramme h :');
+disp(h);
+
+% Histogramme cumulé
+subplot(1, 3, 2);
+H = cumsum(h);
+bar(I_min:I_max, H);
+title('Histogramme cumulé H');
+disp('Histogramme cumulé H :');
+disp(H);
+
+% Normalisation
+
+% ---Histogramme normalisé 1--------
+subplot(1, 3, 2);
+h_normalized = h / sum(h); % Normalisation de l'histogramme
+bar(I_min:I_max, h_normalized);
+title('Histogramme normalisé h_{normalized}');
+disp('Histogramme normalisé h_{normalized} :');
+disp(h_normalized);
+
+% Histogramme cumulé normalisé
+subplot(1, 3, 3);
+H_normalized = H / sum(h); % Normalisation de l'histogramme cumulé
+bar(I_min:I_max, H_normalized);
+title('Histogramme cumulé normalisé H_{normalized}');
+disp('Histogramme cumulé normalisé H_{normalized} :');
+disp(H_normalized);
+
+% ---Histogramme normalisé 2--------
+
+figure;
+[x,y]=size(I); % size() retourne x=5 et y=7 ( nombre de ligne et de colonne de la matrice)
+H_normalize = h/(x*y);
+bar(I_min:I_max,H_normalize);

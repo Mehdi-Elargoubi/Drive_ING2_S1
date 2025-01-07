@@ -1,0 +1,77 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+
+class Perceptron:
+    def _init_(self, n, alpha=0.01, epochs=100):
+        self.poids = np.random.rand(n)
+        self.bias = np.random.rand()
+        self.alpha = alpha
+        self.epochs = epochs
+
+    def fonction_activation(self, x):
+        if(x >= 0):
+            return 1
+        return 0
+
+    def prediction(self, X):
+        somme_ponderee =  np.dot(X,self.poids)+self.bias
+        return self.fonction_activation(somme_ponderee)
+
+    def entrainement(self, X_train, Y_train):
+        l =len(Y_train)
+        for i in range(self.epochs):
+            for j  in range (l):
+                Y_pred = self.prediction(X_train)
+                if(Y_pred != Y_train[j]):
+                    self.poids+=self.alpha*(Y_train[j]-Y_pred)*X_train[j]
+                    self.bias+=self.alpha*(Y_train[j]-Y_pred)
+
+
+    """
+        for epoch in range(self.epochs):
+         for i in range(len(X_train)):
+            # Prédiction
+            prediction = self.prediction(X_train[i])
+            
+            # Calcul de l'erreur
+            erreur = Y_train[i] - prediction
+            
+            # Mise à jour des poids
+            self.poids += self.alpha * erreur * X_train[i]
+            
+            # Mise à jour du biais
+            self.bias += self.alpha * erreur
+    
+    print("Entraînement terminé.")
+    """
+        
+        
+
+    def affichage_seperateur(self,  X_train, Y_train):
+        plt.scatter(X_train[:, 0], X_train[:, 1], c=Y_train)
+        x0 = min(X_train[:,0])
+        x1 = max(X_train[:,0])
+        y0= -1*self.poids[1]/self.poids[0]*x0-self.bias/self.poids[0]
+        y1=y0= -1*self.poids[1]/self.poids[0]*x1-self.bias/self.poids[0]
+        plt.savefig("perceptron.png")
+
+    def evaluate(self, X_test, Y_test):
+        return 0
+
+
+# Charger les données depuis un fichier CSV
+data_train = pd.read_csv("data_train.csv")
+X_train = data_train[['X1','X2']]
+Y_train = data_train['Y']
+print(Y_train)
+# Création et entraînement du perceptron
+perceptron = Perceptron(2,epochs=10)
+perceptron.entrainement(X_train.values, Y_train.values)
+#affichage de la droite separatrice
+perceptron.affichage_seperateur(X_train.values, Y_train.values)
+#evaluer la performance du perceptron
+data_test = pd.read_csv("data_test.csv")
+X_test = data_test[['X1','X2']]
+Y_test = data_test['Y']
+print(perceptron.evaluate(X_test.values,Y_test.values))

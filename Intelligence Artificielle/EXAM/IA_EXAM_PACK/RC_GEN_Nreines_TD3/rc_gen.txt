@@ -1,0 +1,127 @@
+import random
+
+
+def etatInitial(N):
+    etat = []
+    for i in range(N): # for(int i =0;i < N;i++)
+        etat.append(random.randint(0, N - 1))
+    return etat
+
+def afficher(etat):
+    print(etat)
+    N = len(etat)
+    for i in range(N): #ligne
+        for j in range(N): #colonne
+            if(etat[j] == i): 
+                print("|Q", end="")
+            else:
+                print("| ", end="")
+        print("|")
+
+def evaluer(etat):
+    eval = 0
+    N = len(etat)
+    for i in range(N):
+        for j in range(i + 1, N):
+            if etat[i] == etat[j] or abs(i - j) == abs(etat[i] - etat[j]):
+                eval += 1
+               
+    return eval
+
+#Recuit simule
+'''
+def recuit_sim(N,t_init,tauxR):
+   
+    t = t_init
+
+    n_courant = etatInitial(N)
+    afficher(n_courant)
+    print(evaluer(n_courant))
+    while t > 0.1 :
+        voisin = list(n_courant)
+        index = random.randint(0, N-1)
+        nouvelleValeur = random.randint(0, N-1)
+        voisin[index] = nouvelleValeur
+        
+        delta = evaluer(voisin) - evaluer(n_courant)
+        
+        if delta > 0 or random.uniform(0, 1) < math.exp(-delta/t):
+            n_courant = voisin
+
+        t *= tauxR;
+    return n_courant
+
+ 
+solution = recuit_sim(8, 100, 0.999)
+print("Solution Trouvee : ", solution)
+afficher(solution)
+print("Cout de la solution : ", evaluer(solution))
+'''
+
+def fitness(etat):
+    return 1/(1+ evaluer(etat))
+
+def population_initiale(taille_population, N):
+    population = []
+    for i in range(taille_population):
+        population.append(etatInitial(N))
+    return population
+
+def selection(population):
+    total =0
+    for solution in population :
+        total +=fitness(solution)
+    r = random.uniform(0, total)
+    cumulative_fitness = 0
+    for solution in population:
+        cumulative_fitness += fitness(solution)
+        if cumulative_fitness >= r:
+                return solution
+
+
+def croisement(parent1, parent2):
+    point_coupure = random.randint(1, len(parent1) - 1)
+    enfant = parent1[:point_coupure] + parent2[point_coupure:]
+
+    return enfant
+
+def mutation(individu, taux_mutation):
+    individu_mutant = list(individu)
+    for i in range(len(individu_mutant)):
+        if random.uniform(0, 1) < taux_mutation:
+            individu_mutant[i] = random.randint(0, len(individu)-1) # Inversion d'un bit
+
+    return individu_mutant
+
+def algorithme_genetique(N, taille_population, generations, taux_croisement, taux_mutation):
+    population=population_initiale(taille_population,N)
+    print(population)
+    for i in range(0,generations):
+        nouv_population=[]
+        for i in range(0,taille_population):
+            parent1=selection(population)
+            parent2=selection(population)
+            child=croisement(parent1,parent2)
+            child=mutation(child,taux_mutation)
+            nouv_population.append(child)
+                    
+        population=nouv_population
+    max=0
+    solution=[]
+    for element in population :
+        if fitness(element)>max:
+            max=fitness(element)
+            solution=element
+    return solution
+        
+
+# Exemple d'utilisation
+N = 4
+taille_population = 60
+generations = 1000
+taux_croisement = 0.7
+taux_mutation = 0.2
+
+meilleure_solution = algorithme_genetique(N, taille_population, generations, taux_croisement, taux_mutation)
+print("Meilleure solution trouvée :", meilleure_solution)
+print("Fitness de la meilleure solution :", evaluer(meilleure_solution))

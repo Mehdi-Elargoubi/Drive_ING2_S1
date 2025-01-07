@@ -1,0 +1,53 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity counter4b is
+    Port (
+        clk     : in  STD_LOGIC; -- Signal d'horloge
+        reset   : in  STD_LOGIC; -- Réinitialisation
+        enable  : in  STD_LOGIC; -- Activation du compteur
+        count   : out STD_LOGIC_VECTOR(3 downto 0) -- Valeur du compteur
+    );
+end counter4b;
+
+architecture Behavioral of counter4b is
+    signal counter : STD_LOGIC_VECTOR(3 downto 0) := (others => '0');
+begin
+    process(clk, reset)
+    begin
+        if reset = '1' then
+            counter <= (others => '0'); -- Réinitialiser le compteur
+        elsif rising_edge(clk) then
+            if enable = '1' then
+                counter <= counter + 1; -- Incrémenter le compteur
+            end if;
+        end if;
+    end process;
+
+    count <= counter; -- Sortie du compteur
+end Behavioral;
+
+--------------------------
+
+Résultats de Simulation
+Cas de Test :
+
+    Réinitialisation : Lorsque reset = '1', le compteur revient à 0000.
+    Comptage : Lorsque enable = '1', le compteur incrémente à chaque front montant de l'horloge.
+    Pause : Lorsque enable = '0', le compteur reste stable.
+    Reprise : Le compteur continue de compter après la reprise de enable.
+
+Exemple de Chronogramme :
+
+    Temps 0 ns : reset = 1 → count = 0000
+    Temps 20 ns : reset = 0, enable = 1 → count = 0001, 0010, 0011, ...
+    Temps 120 ns : enable = 0 → count reste constant.
+    Temps 170 ns : reset = 1 → count = 0000.
+
+Conclusion
+
+Ce circuit séquentiel simple montre comment utiliser des processus en VHDL pour modéliser un compteur. Le testbench vérifie tous les scénarios nécessaires pour garantir son fonctionnement correct.
+
+Si vous souhaitez ajouter des fonctionnalités spécifiques ou simuler un autre type de circuit séquentiel, faites-le-moi savoir !

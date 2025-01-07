@@ -1,0 +1,16 @@
+Les règles du jeu sont les suivantes:
+
+La survie : chaque cellule ayant deux ou trois cellules adjacentes survit jusqu'à la génération suivante.
+La mort : chaque cellule ayant quatre cellules adjacentes ou plus disparaît, ou meurt, par surpopulation. Chaque cellule n'ayant qu'une ou aucune, cellule adjacente meurt d'isolement.
+La naissance : chaque emplacement adjacent a exactement trois cellules, fait naître une nouvelle cellule pour la génération suivante.
+Toutes les naissances et toutes les morts ont lieu en même temps au cours d'une génération.
+Le but de cet exercice est d'écrire un programme qui régisse une population de cellules. Il vous est demandé de procéder par étape:
+
+Analysez le problème, déterminez les structures de données à utiliser.
+Ecrire une méthode init() qui initialise ces données.
+Vérifiez que la méthode init() fonctionne correctement.
+Ecrire une méthode nombreVoisin(), qui calcule le nombre de voisin d'une cellule.
+Vérifiez que la méthode nombreVoisin() fonctionne correctement.
+Ecrire une méthode nextGeneration() qui implémente les règles de vie des cellules, et permet de trouver la nouvelle génération de cellule.
+Présentez les résultats sous la forme d’un tableau
+

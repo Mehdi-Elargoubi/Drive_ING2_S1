@@ -1,0 +1,72 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import Ridge
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.metrics import mean_squared_error
+
+# Définition de la fonction avec bruit gaussien
+def generate_noisy_data(nb):
+    # Génération de nb points aléatoires uniformément dans [-3, 10]
+    X = np.random.uniform(-3, 10, nb)
+                #lowla inclus taniya exclu
+    
+    # Calcul des valeurs selon la fonction 10 * sin(x) / x
+    y_true = 10 * np.sin(X) / X
+    
+    # Ajout d'un bruit gaussien de moyenne 0 et de variance 1
+    noise = np.random.normal(0, 1, nb)
+    y_noisy = y_true + noise
+    
+    return X, y_noisy
+
+# Génération des données bruitées
+nb_points = 15
+X_train, y_train_noisy = generate_noisy_data(nb_points)
+
+print("be4 " ,X_train)
+print("After " ,X_train.reshape(-1,1))
+
+###############
+# Affichage des données dans un graphe
+plt.figure(1)
+plt.title('Données bruitées - Entraînement')
+plt.scatter(X_train, y_train_noisy, color='black', label='Données bruitées')
+
+# Régression polynomiale d'ordre 1
+degree = 1
+model = make_pipeline(PolynomialFeatures(degree), Ridge())
+model.fit(X_train.reshape(-1, 1), y_train_noisy)
+# Affichage du modèle de degré 1
+X_range = np.linspace(-3, 10, 100).reshape(-1, 1)
+plt.plot(X_range, model.predict(X_range), color='green', label=f'Degree {degree}')
+#plt.plot(X,Y,color dyal khet , smiya)
+
+plt.xlabel('X')
+plt.ylabel('y')
+plt.legend()
+plt.show()
+
+
+
+###############
+# Régression polynomiale pour différents degrés
+degrees = [1, 3, 6, 9, 12]
+colors = ['red', 'green', 'blue', 'orange', 'purple']
+
+plt.figure(2)
+plt.title('Régression polynomiale pour différents degrés')
+plt.scatter(X_train, y_train_noisy, color='black', label='Données bruitées')
+
+for degree, color in zip(degrees, colors):
+    model = make_pipeline(PolynomialFeatures(degree), Ridge())
+    model.fit(X_train.reshape(-1, 1), y_train_noisy)
+    
+    # Affichage du modèle
+    X_range = np.linspace(-3, 10, 100).reshape(-1, 1)
+    plt.plot(X_range, model.predict(X_range), color=color, label=f'Degree {degree}')
+
+plt.xlabel('X')
+plt.ylabel('y')
+plt.legend()
+plt.show()

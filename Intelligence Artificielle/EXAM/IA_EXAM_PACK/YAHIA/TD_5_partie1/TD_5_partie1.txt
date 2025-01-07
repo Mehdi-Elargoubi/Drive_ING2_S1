@@ -1,0 +1,45 @@
+Q * Q *
+* * * Q 
+* * * *
+* Q * *
+
+cost = 1
+
+* Q * *
+* * * Q 
+Q * Q *
+* * * *
+
+cost = 2
+
+* Q * Q
+* * Q * 
+Q * * *
+* * * *
+
+cost = 3
+
+* * * *
+* Q Q * 
+* * * *
+Q * * Q
+
+cost = 4
+
+
+
+
+N = 4
+ 0 3 0 2 cost = 1 selection fitness = 100.0 selection proba = 49.999999999999986 selected = true
+ 2 0 2 1 cost = 2 selection fitness = 66.66666666666667 selection proba = 33.33333333333333 selected = true
+ 2 0 1 0 cost = 3 selection fitness = 33.333333333333336 selection proba = 16.666666666666664 selected = true
+ 3 1 1 3 cost = 4 selection fitness = 0.0 selection proba = 0.0 selected = false
+
+
+formule fitness:
+chromo.setFitness((worstScore - chromo.getCost()) * 100.0 / (worstScore - bestScore));
+
+formule probabilty:
+chromo.getFitness() / total
+total = somme des fitness
+

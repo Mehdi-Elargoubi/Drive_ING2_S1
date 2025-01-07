@@ -1,0 +1,229 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"></head><body data-new-gr-c-s-check-loaded="8.912.0" data-gr-ext-installed="" cz-shortcut-listen="true"><h2 style="font-size: 20.5px;"><span class="header-link octicon octicon-link"></span>Cheat Sheet : dplyr functions</h2><img src="R_Data%20science_Cheat%20Sheet_dplyr%20functions_fichiers/IDSNlogo.png" width="200" height="200" style="font-size: 10px;"><table style="font-size: 10px;">
+<tbody><tr>
+<th style="width:10%;">
+Command
+</th>
+<th style="width:30%;">
+Syntax
+</th>
+<th style="width:30%;">
+Description
+</th>
+<th style="width:30%;">
+Example
+</th>
+</tr>
+
+<tr>
+<td style="width:10%;">
+select
+</td>
+<td style="width:30%;">
+<code>select() </code>
+</td>
+<td style="width:30%;">
+<code>select()</code> function selects variables by their names.
+</td>
+<td style="width:30%;">
+<code>select(sub_airline,c(month,dayofweek,reporting_airline,crsdepTime))</code>
+</td>
+</tr>
+
+<tr>
+<td style="width:10%;">
+filter
+</td>
+<td style="width:30%;">
+<code>filter()</code>
+</td>
+<td style="width:30%;">
+<code>filter()</code> function screens out observations based on values.
+</td>
+<td style="width:30%;">
+<code>sub_airline %&gt;% 
+  filter(Month == 1) %&gt;%
+  group_by(Reporting_Airline) %&gt;%
+  summarize(avg_carrier_delay = mean(CarrierDelay, na.rm = TRUE))</code>
+</td>
+</tr>
+
+<tr>
+<td style="width:10%;">
+%&gt;% pipe operator
+</td>
+<td style="width:30%;">
+<code>%&gt;%</code>
+</td>
+<td style="width:30%;">
+<code>%&gt;% pipe operator</code> To combine functions, use the pipe operator. You can read the pipe operator as “then” in the function.
+</td>
+<td style="width:30%;">
+<code>sub_airline &lt;- airlines %&gt;% 
+  filter(Origin == "LAX", Dest == "JFK", 
+         Cancelled != 1, Diverted != 1) %&gt;% 
+  select(Month, DayOfWeek, FlightDate, 
+         Reporting_Airline, Origin, Dest, 
+         CRSDepTime, CRSArrTime, DepTime, 
+         ArrTime, ArrDelay, ArrDelayMinutes, 
+         CarrierDelay, WeatherDelay)</code>
+</td>
+</tr>
+
+<tr>
+<td style="width:10%;">
+install package 
+</td>
+<td style="width:30%;">
+<code>install.packages("packagename")</code>
+</td>
+<td style="width:30%;">
+<code>install.packages</code> is used to install the packages from the R library.
+</td>
+<td style="width:30%;">
+<code>install.pakages("tidyverse")</code>
+</td>
+</tr>
+
+<tr>
+<td style="width:10%;">
+load package 
+</td>
+<td style="width:30%;">
+<code>library(packagename) </code>
+</td>
+<td style="width:30%;">
+<code>library()</code> Load the package from R library.
+</td>
+<td style="width:30%;">
+<code>library(tidyverse)</code>
+</td>
+</tr>
+
+<tr>
+<td style="width:10%;">
+read_csv
+</td>
+<td style="width:30%;">
+<code>read_csv(file) </code>
+</td>
+<td style="width:30%;">
+<code>read_csv()</code> reads the csv file using readr package.
+</td>
+<td style="width:30%;">
+<code>read_csv('airline_2m.csv')</code>
+</td>
+</tr>
+
+<tr>
+<td style="width:10%;">
+download.file()
+</td>
+<td style="width:30%;">
+<code>download.file(url, destfile, method, quiet = FALSE, mode = "w",cacheOK = TRUE,headers = NULL, …)</code>
+</td>
+<td style="width:30%;">
+<code>download.file()</code> to download the file locally using the download.file() function.
+
+<p>url naming the URL of a resource to be downloaded.</p>
+<p>destfile a character string with the name where the downloaded file is saved.</p>
+</td>
+<td style="width:30%;">
+<code>download.file(url, destfile = "airline_2m.tar.gz")</code>
+</td>
+</tr>
+
+<tr>
+<td style="width:10%;">
+head()
+</td>
+<td style="width:30%;">
+<code>head(x) </code>
+</td>
+<td style="width:30%;">
+<code>head(x)</code> function returns the first part of a vector, matrix, table, data frame or function.
+</td>
+<td style="width:30%;">
+<code>head(sub_airline)</code>
+</td>
+</tr>
+
+<tr>
+<td style="width:10%;">
+tail()
+</td>
+<td style="width:30%;">
+<code>tail(x) </code>
+</td>
+<td style="width:30%;">
+<code>tail(x)</code> function returns the last parts of a vector, matrix, table, data frame or function.
+</td>
+<td style="width:30%;">
+<code>tail(sub_airline)</code>
+</td>
+</tr>
+
+<tr>
+<td style="width:10%;">
+write_csv()
+</td>
+<td style="width:30%;">
+<code>write.csv(x, file, traitsAsDir = FALSE, csv2 = TRUE, row.names = FALSE, ...) </code>
+</td>
+<td style="width:30%;">
+<code>write_csv()</code> save summaries of partitioned breeding values 
+to CSV files on disk for further analyses of processing with other 
+software or just for saving (backing up) results.
+
+<p>x object returned from function.</p>
+<p>file file name with or without .csv extension, e.g.file.csv are valid.</p>
+<p>traitsAsDir should results be saved within trait folders; the 
+construction is file.path(dirname(file), trait, basename(file)); folders
+ are created if they do not exist.</p>
+<p>csv2 export using write.csv2 or write.csv.</p>
+</td>
+<td style="width:30%;">
+<code>write_csv(sub_airline, "lax_to_jfk.csv")</code>
+</td>
+</tr>
+
+<tr>
+<td style="width:10%;">
+glimpse()
+</td>
+<td style="width:30%;">
+<code>glimpse(tbl, width = getOption("width"))</code>
+</td>
+<td style="width:30%;">
+<code>glimpse()</code> function shows you the number of rows and columns in the dataset, and each columnss name, type, and data preview.
+
+<p>tbl A data table</p>
+<p>width defaults to the width of the console.</p>
+</td>
+<td style="width:30%;">
+<code>glimpse(sub_airline)</code>
+</td>
+</tr>
+
+</tbody></table><h2 style="font-size: 20.5px;"><span class="header-link octicon octicon-link"></span>Author(s)</h2><h4 style="font-size: 13.5px;"> Amrutha Rao </h4><h2 style="font-size: 20.5px;"><span class="header-link octicon octicon-link"></span>Changelog</h2><table style="font-size: 10px;">
+<thead>
+<tr>
+<th>Date</th>
+<th>Version</th>
+<th>Changed by</th>
+<th>Change Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2023-05-11</td>
+<td>1.1</td>
+<td>Eric Hao &amp; Vladislav Boyko</td>
+<td>Updated Page Frames</td>
+</tr>
+<tr>
+<td>2021-08-05</td>
+<td>1.0</td>
+<td>Amrutha Rao</td>
+<td>Initial Version</td>
+</tr>
+</tbody></table></body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>

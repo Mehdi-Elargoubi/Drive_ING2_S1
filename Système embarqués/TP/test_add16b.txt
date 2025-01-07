@@ -1,0 +1,42 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+
+ENTITY test_add16b IS
+END test_add16b;
+
+ARCHITECTURE behavior OF test_add16b IS
+    COMPONENT add16b
+        PORT(
+            A16     : IN  std_logic_vector(15 downto 0);
+            B16     : IN  std_logic_vector(15 downto 0);
+            Cin_16  : IN  std_logic;
+            S16     : OUT std_logic_vector(15 downto 0);
+            Cout_16 : OUT std_logic
+        );
+    END COMPONENT;
+
+    -- Inputs
+    signal A16 : std_logic_vector(15 downto 0) := (others => '0');
+    signal B16 : std_logic_vector(15 downto 0) := (others => '0');
+    signal Cin_16 : std_logic := '0';
+
+    -- Outputs
+    signal S16 : std_logic_vector(15 downto 0);
+    signal Cout_16 : std_logic;
+
+BEGIN
+    -- Instantiate the Unit Under Test (UUT)
+    uut: add16b PORT MAP (
+          A16 => A16,
+          B16 => B16,
+          Cin_16 => Cin_16,
+          S16 => S16,
+          Cout_16 => Cout_16
+        );
+
+    -- Test cases
+    A16 <= X"0000" after 0 ns, X"000F" after 100 ns, X"0F0F" after 200 ns, X"FFFF" after 300 ns;
+    B16 <= X"0000" after 0 ns, X"0001" after 100 ns, X"F0F0" after 200 ns, X"0001" after 300 ns;
+    Cin_16 <= '0' after 0 ns, '1' after 400 ns;
+
+END;

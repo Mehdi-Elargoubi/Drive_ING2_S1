@@ -1,0 +1,87 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+
+#Exercice 1
+
+#X : un tableau numpy contenant les données (tailles des pizzas)
+#Y : un tableau contenant les prix correspondants
+X = np.array([[6], [8], [10], [14], [18]]) #X = [6, 8 ,10, 14, 18]
+y = [7, 9, 13, 17.5, 18] 
+
+plt.figure(1)
+plt.clf()
+plt.title('Pizza Prices plotted against sizes')
+plt.xlabel('Sizes in cms')
+plt.ylabel('Price in euros')
+plt.scatter(X, y, color='black')
+plt.axis([0, 25, 0, 25])
+plt.grid(True)
+plt.show()
+
+# Exercice 2: Regression linéaire
+# Création du modèle de régression linéaire
+model = LinearRegression()
+
+# Entraînement du modèle
+model.fit(X, y)
+
+# Prédiction pour de nouveaux exemples
+X_new = np.array([[0],[5], [11], [12], [15],[25]])
+y_pred = model.predict(X_new)
+print(y_pred)
+
+# Affichage du modèle sur le graphe
+plt.figure(1)
+plt.clf()
+plt.title('Pizza Prices plotted against sizes')
+plt.xlabel('Sizes in cms')
+plt.ylabel('Price in euros')
+plt.plot(X_new, y_pred, color='blue', linewidth=3, label='Linear Regression')  # Affichage de la droite de régression
+plt.scatter(X, y, color='black')
+plt.scatter(X_new, y_pred, color='red')
+
+plt.axis([0, 25, 0, 25])
+plt.grid(True)
+plt.show()
+
+#Question 3 : Evaluation du modèle 
+
+# Calcul de l'erreur résiduelle (RSS)
+y_pred_train = model.predict(X)  # Prédiction sur l'ensemble d'apprentissage
+
+# Calcul de l'erreur résiduelle
+RSS = np.sum((y - y_pred_train)**2)
+print(f"Residual sum of squares (RSS): {RSS:.2f}")
+
+#Question 4 : Etude théorique de notre problème de pizza
+#Calcul de la variance de x
+variance_x = np.var(X, ddof=1)  #ddof: Il s'agit de l'argument (degré de liberté) qui est utilisé pour normaliser le calcul de la variance
+#utiliser ddof=1 dans le contexte de la variance signifie que vous appliquez la correction de Bessel pour obtenir une estimation non biaisée de la variance lorsque vous travaillez avec des échantillons.
+
+# Calcul de la covariance de x et y
+covariance_xy = np.cov(X.transpose(), y)[0][1] #.cov() : calculer la matrice de covariance entre deux ensemble de donnée
+#X.transpose(): Cela transpose la matrice X, échange les lignes et les colonnes. La transposition est nécessaire car np.cov() s'attend à ce que chaque colonne représente une variable et chaque ligne une observation. Par transposer X, on s'assure que chaque colonne de X correspond à une variable.
+#y: C'est l'autre variable (dépendante) pour laquelle nous voulons calculer la covariance avec X.
+#np.cov(X.transpose(), y): Cela calcule la matrice de covariance entre X et y. La matrice de covariance est une matrice symétrique qui indique comment les variables varient conjointement. Dans le contexte de la régression linéaire, nous sommes particulièrement intéressés par la covariance entre X et y.
+#[0][1]: Comme la matrice de covariance est symétrique, [0][1] (ou [1][0]) fait référence à la covariance entre X et y. C'est cette valeur qui sera utilisée pour calculer le coefficient de pente (alpha) de la régression linéaire.
+
+# Calcul des paramètres alpha et beta
+alpha = covariance_xy / variance_x
+beta = np.mean(y) - alpha * np.mean(X)
+
+print(f"Parameter alpha (slope): {alpha:.2f}")
+print(f"Parameter beta (intercept): {beta:.2f}")
+
+# Exercice 4: Evaluation sur un ensemble de test
+# Définition de l'ensemble de test
+X_test = np.array([[8], [9], [11], [16], [12]])
+y_test = [11, 8.5, 15, 18, 11]
+
+# Calcul du coefficient de détermination (R-squared) sur l'ensemble de test
+y_pred_test = model.predict(X_test)
+SS_res_test = np.sum((y_test - y_pred_test)**2)
+SS_tot_test = np.sum((y_test - np.mean(y_test))**2)
+R_squared_test = 1 - (SS_res_test / SS_tot_test)
+# R_squared 9rib l 1 rah mzyan --- sgher mn 0.5 khayb 
+print(f"R-squared on test set: {R_squared_test:.2f}")

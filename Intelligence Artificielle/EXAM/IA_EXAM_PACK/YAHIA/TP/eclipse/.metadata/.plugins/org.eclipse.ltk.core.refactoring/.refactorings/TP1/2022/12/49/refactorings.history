@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 3 elements to &apos;exem_Astar/src/exem_Astar&apos;&#x0D;&#x0A;- Original project: &apos;TP1&apos;&#x0D;&#x0A;- Destination element: &apos;exem_Astar/src/exem_Astar&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     A_Star.Noeud.java&#x0D;&#x0A;     A_Star.Grille.java&#x0D;&#x0A;     A_Star.Solveur.java" description="Copy compilation units" destination="=exem_Astar/src&lt;exem_Astar" element1="/src&lt;A_Star{Noeud.java" element2="/src&lt;A_Star{Grille.java" element3="/src&lt;A_Star{Solveur.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1670276851815" units="3" version="1.0"/>
+</session>

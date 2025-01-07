@@ -1,0 +1,62 @@
+hLIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+
+ENTITY test_counter4b IS
+END test_counter4b;
+
+ARCHITECTURE behavior OF test_counter4b IS
+    -- Component Declaration for the Unit Under Test (UUT)
+    COMPONENT counter4b
+    PORT(
+        clk     : IN  std_logic;
+        reset   : IN  std_logic;
+        enable  : IN  std_logic;
+        count   : OUT std_logic_vector(3 downto 0)
+    );
+    END COMPONENT;
+
+    -- Inputs
+    signal clk     : std_logic := '0';
+    signal reset   : std_logic := '0';
+    signal enable  : std_logic := '0';
+
+    -- Outputs
+    signal count   : std_logic_vector(3 downto 0);
+
+    -- Clock period definition
+    constant clk_period : time := 10 ns;
+
+BEGIN
+    -- Instantiate the Unit Under Test (UUT)
+    uut: counter4b PORT MAP (
+        clk => clk,
+        reset => reset,
+        enable => enable,
+        count => count
+    );
+
+    -- Clock process definitions
+    clk_process :process
+    begin
+        clk <= '0';
+        wait for clk_period/2;
+        clk <= '1';
+        wait for clk_period/2;
+    end process;
+
+    -- Stimulus process
+    stim_proc: process
+    begin
+        -- Initial state
+        reset <= '1'; wait for clk_period*2; -- Reset actif
+        reset <= '0'; wait for clk_period*2;
+
+        enable <= '1'; wait for clk_period*10; -- Compteur actif
+
+        enable <= '0'; wait for clk_period*5; -- Pause du compteur
+        enable <= '1'; wait for clk_period*10;
+
+        reset <= '1'; wait for clk_period*2; -- Réinitialisation
+        wait;
+    end process;
+END;

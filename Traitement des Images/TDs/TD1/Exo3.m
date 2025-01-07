@@ -1,0 +1,36 @@
+% 1) Charger l'image en mémoire
+load('image1.mat');
+
+% 2) Afficher l'image
+figure;
+imshow(J); % Affiche l'image chargée
+title('Image originale');
+
+% 3) Afficher l'histogramme de l'image dans une autre figure
+figure;
+imhist(J); % Affiche l'histogramme de l'image
+title('Histogramme de l''image 1');
+xlabel('Niveaux de gris');
+ylabel('Nombre de pixels');
+
+figure;
+subplot(2,2,1);
+I1=(J>35)&(J<92);
+imshow(I1);
+title("Tache 1");
+
+subplot(2,2,2);
+I2=(J>92)&(J<170);
+imshow(I2);
+title("Tache 2");
+
+subplot(2,2,3);
+I3=(J>170);
+imshow(I3);
+title("Tache 3");
+
+subplot(2,2,4);
+I4=(J<35);
+imshow(I4);
+title("Tache 4");
+
