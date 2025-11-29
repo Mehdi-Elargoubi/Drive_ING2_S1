@@ -1,0 +1,50 @@
+I = load("coloredchips.mat");
+I = I.I;
+size(I)
+imshow(I)
+X = BlocMouse(I, 51)
+Y = X;
+X = uint8(X);
+figure(2);
+subplot(4, 2, 1)
+Warning: An error occurred while drawing the scene: Error while processing frame: Error: Could not load TeX fonts. Falling back to uninterpreted text. 
+imshow(I);
+title("Image Chips");
+subplot(4, 2, 2)
+imshow(X);
+title("La reference selectionee");
+subplot(4, 2, 3)
+imshow(X(:, :, 1))
+title("La premiere composante R :");
+subplot(4, 2, 4)
+imhist(X(:,:,1))
+title("Histogramme composante R")
+subplot(4, 2, 5)
+imshow(X(:,:,2))
+title("La premiere composante G :");
+subplot(4, 2, 6)
+imhist(X(:,:,2))
+title("Histogramme composante G")
+subplot(4, 2, 7)
+imshow(X(:,:,3))
+title("La troisieme composante B :");
+subplot(4, 2, 8)
+imhist(X(:,:,3))
+title("Histogramme composante B")
+subplot(4, 2, 5)
+title("La deuxieme composante G :");
+
+%%%%%%% 
+C = CorrImage(I, X, 0);
+figure(3)
+subplot(2,1,1)
+imshow(C, [])
+subplot(2,1,1)
+imshow(C, [])
+figure(3)
+subplot(2,1,1)
+imshow(C, [])
+title("Imshow de la matrice Correlation")
+subplot(2,1,2)
+mesh(C)
+title("Meshawschsky")
